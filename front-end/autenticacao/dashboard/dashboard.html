@@ -1,0 +1,173 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" style="background:white;min-height:30px; border-radius:8px;padding-bottom: 5px; margin-bottom:20px; margin-right: 30px;">
+            <div class="col-md-6">
+                <img style="border-radius: 8px; widht: 200px; height: 200px; margin-top:10px; margin-bottom:10px;" src="{{user.imagem}}" style="" alt="">
+            </div>
+            <div class="col-md-6" style="padding:0;margin-top:20px;">
+                <div class="col-md-12"><b>Nome</b> | {{user.nome}} </div>
+                <div class="col-md-12"><b>Apelido</b> | {{user.apelido}}</div>
+                <div class="col-md-12"><b>E-mail</b> | {{user.email}} </div>
+                <!-- <div class="col-md-12"><b>Data de Nascimento</b> | {{user.dtNascimento}}</div> -->
+                <div class="col-md-12" style="margin-top:10px;">
+                    <div class="col-md-5" style="margin-right:30px;">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalEdit">Editar Perfil</button>
+                    </div>
+                    <div class="col-md-5">
+                        <a href="/#!/perfil"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal">Ver perfil</button></a>
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding-left: 50px; margin-top: 10px;">
+                    <button type="button" class="btn btn-danger btn-lg" ng-if="contemSolicitacao()" data-toggle="modal" data-target="#myModal">Verificar Solicitações</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5" style="background:white;min-height:30px; border-radius:8px; margin-bottom:20px;">
+            <form novalidate name="formPostagem" ng-submit="postarPost(postagem)" style="margin:30px">
+                <div class="col-md-9">
+                    <div class="form-group" data-ng-class="{'has-error':!formPostagem.comentario.$valid}">
+                        <label for="texto">-- MENSAGEM A VER --</label>
+                        <textarea ng-model="postagem.texto" id="texto" name="texto" class="form-control" placeholder="Texto" type="textarea" ng-maxlength="4000" required></textarea>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group" data-ng-class="{'has-error':!formPostagem.comentario.$valid}">
+                        <input ng-model="postagem.imagem" id="imagem" name="imagem" class="form-control" placeholder="Imagem" type="text" ng-maxlength="128">
+                    </div>
+                </div>
+                <div class="col-md-4" style="margin-bottom:20px;">
+                        <input type="submit" class="btn btn-primary" value="Kabumpostar">
+                </div>
+                <div class="col-md-4">
+                    <input style="float:right;" ng-model="postagem.isPrivado"  type="checkbox" id="teste">
+                    <label style="float:right;" class="checkbox" for="teste">Privado ?</label>
+                </div>
+            </form>
+        </div>  
+    </div>
+</div>
+    
+<div class="row" ng-repeat="postagem in postagens" style="margin-top:20px;">
+    <div class="container col-md-6 col-md-offset-3" style="background:white;min-height:30px; border-radius:8px;">
+        <div class="col-md-2 page-header" style="margin-top:10px;margin-bottom:10px;padding-bottom: 14px;">
+            <img class="perfilimg" ng-src="{{postagem.usuarioDto.imagem}}" alt="">
+        </div>
+        <div class="col-md-10 page-header" style="margin-top:10px;margin-bottom:10px;">
+            <div class="row">
+                <b>{{postagem.usuarioDto.nome}}</b>
+                <input style="float:right;" ng-checked="verificarCurtida(postagem)" data-ng-model="x" ng-click="curtir(postagem)" type="checkbox" id="{{postagem.id}}">
+                <label style="float:right;" class="checkbox" for="{{postagem.id}}">Kabumtir</label>
+            </div>
+            <div class="row">
+                {{postagem.hora}}
+                <tt style="float:right; margin-left:5px;">{{postagem.curtidas.length}}</tt>
+                <b style="float:right;">Kabumtidas : </b>
+                
+            </div>
+        </div>
+        <div class="col-md-12 page-header" style="margin-top:10px;margin-bottom:10px;">
+            <div class="row" style="margin-top:0px;">
+                {{postagem.texto}}
+            </div>
+            <div class="row text-center" style="margin-top:10px;margin-bottom:10px;">
+                <img style="border-radius:8px;widht:200px;height: 200px;" ng-src="{{postagem.imagem}}" alt="">
+            </div>
+        </div>
+        <form name="formComentario" ng-submit="comentar(comentario)">
+            <div class="col-md-9">
+                <div class="form-group" data-ng-class="{'has-error':!formComentario.comentario.$valid}">
+                    <input ng-model="comentario.comentario" id="comentario" name="comentario" class="form-control" placeholder="Comentario" aria-describedby="basic-addon1" type="text" ng-maxlength="128" required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-primary" value="Kabumentar">
+            </div>
+        </form>
+        <div class="row">
+        </div>
+        <div class="row" ng-repeat="comentario in postagem.comentarios" style="margin-bottom: 10px;">
+            <div class="col-md-1" style="padding:0;padding-left:5px;">
+                <img class="perfilimg" ng-src="{{comentario.usuario.imagem}}" alt="">
+            </div>
+            <div class="col-md-11">
+                <div class="row">
+                    <b>{{comentario.usuario.nome}}</b>
+                </div>
+                <div class="row">
+                    {{comentario.comentario}}
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center" style="margin-top:10px;">
+            <button ng-if="!ultimaPagina" type="button" class="btn btn-info" ng-click="buscarPostagens()">Ver mais</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="container col-md-12 text-center">
+            <table class="table table-hover table-bordered" style="background: white;">
+                <tbody>
+                    <tr ng-repeat="usuario in solicitacoes.data">
+                        <td><img class="perfilimg" ng-src="{{usuario.imagem}}" alt=""><b style="margin-left:10px">{{usuario.nome}}</b></td>
+                        <td><input type="button" name="opAceitar" class="btn btn-primary" value="Aceitar" ng-click="aceitaSolicitacao(usuario.id)">
+                            <input type="button" class="btn btn-default" name="opExcluir" value="Rejeitar" ng-click="removeSolicitacao(usuario.id)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="myModalEdit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="container col-md-12 text-center" style="background: white;border-radius:10px;">
+                <form novalidate name="formUsuario" >
+                    <div class="col-sm-8 col-sm-offset-2" style="margin-top: 20px;">
+                        <div class="form-group" data-ng-class="{'has-error':!formUsuario.nome.$valid}">
+                            <label for="nome">Nome</label>
+                            <input ng-model="user.nome" id="nome" name="nome" class="form-control" placeholder="Primeiro Nome" aria-describedby="basic-addon1" type="text" ng-maxlength="128" required>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="form-group" data-ng-class="{'has-error':!formUsuario.apelido.$valid}">
+                            <label for="apelido">Apelido</label>
+                            <input ng-model="user.apelido" id="apelido" name="apelido" class="form-control" placeholder="Apelido" aria-describedby="basic-addon1" type="text" ng-maxlength="128" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-8 col-sm-offset-2" data-ng-class="{'has-error':!formUsuario.imagem.$valid}">
+                        <div class="form-group">
+                            <label for="imagem">imagem</label>
+                            <input ng-model="user.imagem" id="imagem" name="imagem" class="form-control" placeholder="imagem" aria-describedby="basic-addon1" type="text" ng-maxlength="512" required>
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-6 col-sm-offset-3" style="margin-bottom: 20px;">
+                        <button ng-click="editar(user)" data-dismiss="modal" class="btn btn-primary btn-block">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+      

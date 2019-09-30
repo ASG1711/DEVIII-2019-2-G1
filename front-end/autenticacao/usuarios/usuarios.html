@@ -1,0 +1,57 @@
+
+    <div class="row">           
+        <div class="col-sm-6 col-sm-offset-3">
+            <h2>Usuário</h2>
+        </div>
+    </div>
+    <div class="row">           
+        <div class="col-sm-6 col-sm-offset-3 bg-glass">
+            <form novalidate name="formUsuario">
+
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="form-group" data-ng-class="{'has-error':!formUsuario.nome.$valid}">
+                        <label for="nome">Nome</label>
+                        <input ng-model="usuario.nome" id="nome" name="nome" class="form-control" placeholder="Primeiro Nome" aria-describedby="basic-addon1" type="text" ng-maxlength="128" required>
+                    </div>
+                </div>
+
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="form-group" data-ng-class="{'has-error':!formUsuario.apelido.$valid}">
+                        <label for="apelido">Apelido</label>
+                        <input ng-model="usuario.apelido" id="apelido" name="apelido" class="form-control" placeholder="Apelido" aria-describedby="basic-addon1" type="text" ng-maxlength="128" required>
+                    </div>
+                </div>
+
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="form-group" data-ng-class="{'has-error':!formUsuario.dtNascimento.$valid}">
+                        <label for="dtNascimento">Data de nascimento</label>
+                        <input ng-model="usuario.dtNascimento" id="dtNascimento" name="dtNascimento" class="form-control" aria-describedby="basic-addon1" type="date" >
+                    </div>
+                </div>
+
+                <div class="col-sm-8 col-sm-offset-2" data-ng-class="{'has-error':!formUsuario.email.$valid}">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input ng-model="usuario.email" id="email" name="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1" type="email" ng-maxlength="128" required>
+                    </div>
+                </div>
+    
+                <div class="col-sm-8 col-sm-offset-2" data-ng-class="{'has-error':!formUsuario.senha.$valid}">
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input ng-model="usuario.senha" id="senha" name="senha" class="form-control" placeholder="Senha" aria-describedby="basic-addon1" type="password" ng-maxlength="128" required>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-sm-offset-2" data-ng-class="{'has-error':!formUsuario.imagem.$valid}">
+                    <div class="form-group">
+                        <label for="imagem">imagem</label>
+                        <input ng-model="usuario.imagem" id="imagem" name="imagem" class="form-control" placeholder="imagem" aria-describedby="basic-addon1" type="text" ng-maxlength="512" required>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-sm-offset-3">
+                    <button ng-click="registrar( usuario )" class="btn btn-primary btn-block">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>

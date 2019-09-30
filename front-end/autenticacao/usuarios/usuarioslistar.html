@@ -1,0 +1,32 @@
+<div class="row" style="margin-top: 10px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+            <input style="margin-bottom:20px;" class="form-control mr-sm-2" type="text" ng-model="search.nome" placeholder="Buscar contatos...">
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="col-md-12" style="background:white;min-height:30px; border-radius:8px; margin-bottom:20px;">
+    <div class="row" style="margin-top: 50px;">
+        <div class="container col-md-11 text-center"></div>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Usuários</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="usuario in usuarios  | filter: search">
+                    <td><a style="text-decoration:none;color:black;" href="#!/perfil?idUser={{usuario.id}}"><img class="perfilimg" src="{{usuario.imagem}}"><b style="margin-left:10px">Nome : </b>{{usuario.nome}} | <b style="margin-left:10px">Apelido : </b> {{usuario.apelido}} | <b style="margin-left:10px">E-mail : </b> {{usuario.email}}</a></td>
+                    <td><input type="button" name="opEnviar" class="btn btn-primary" ng-if="isValido(usuario)" value="Enviar Solicitação" ng-click="enviarSolicitacao(usuario.id)">
+                        <input type="button" name="opAceitar" class="btn btn-primary" ng-if="enviadoSolicitacao(usuario)" value="Aceitar" ng-click="aceitaSolicitacao(usuario.id)">
+                        <input type="button" class="btn btn-default" name="opExcluir" ng-if="enviadoSolicitacao(usuario)" value="Rejeitar" ng-click="removeSolicitacao(usuario.id)">
+                        <button type="button" class="btn btn-danger" ng-if="isAmizade(usuario.id)" data-toggle="modal" ng-click="removerAmizade(usuario.id);">Remover amizade!</button>
+                        <input type="button" name="opEnviado" class="btn btn-primary" ng-if="solicitacaoEnviada(usuario)" value="Solicitação enviada..." disabled>
+                    </td>
+                </tr>
+                </tbody>
+            </table> 
+        </div>   
+    </div>
+</div>
