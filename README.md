@@ -23,11 +23,14 @@ Caso não esteja, ativar com:
 lsnrctl start
 ```
  
-Feito isso, criar um usuário no banco e dar Grant - precisa constar ";" no fim da instrução:
-	
-CREATE USER Desenvolvimento identified by Teste123; (pode mudar se quiser, lembre de mudar no ApplicationProprieties)
-
+Feito isso, criar um usuário no banco e dar Grant, o que pode ser feito usando o comando da linha de comando "sqlplus" - note que é necessário constar ";" no fim da instrução:
+```bash	
+CREATE USER Desenvolvimento identified by Teste123; 
+```
+(pode mudar se quiser, lembre de mudar no ApplicationProprieties)
+```bash
 GRANT create session,create table,create view TO Desenvolvimento;
+```
 
 Para conveniência, criar nova conexão no SQL Developer, apontando pro host "localhost" e porta default "1521". Usar SID "ex" e usuário e senha "Developer" e "Teste123".
 
