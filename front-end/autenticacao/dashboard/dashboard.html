@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="col-md-4" style="margin-bottom:20px;">
-                        <input type="submit" class="btn btn-primary" value="Kabumpostar">
+                        <input type="submit" class="btn btn-primary" value="Postar">
                 </div>
                 <div class="col-md-4">
                     <input style="float:right;" ng-model="postagem.isPrivado"  type="checkbox" id="teste">
@@ -57,12 +57,12 @@
             <div class="row">
                 <b>{{postagem.usuarioDto.nome}}</b>
                 <input style="float:right;" ng-checked="verificarCurtida(postagem)" data-ng-model="x" ng-click="curtir(postagem)" type="checkbox" id="{{postagem.id}}">
-                <label style="float:right;" class="checkbox" for="{{postagem.id}}">Kabumtir</label>
+                <label style="float:right;" class="checkbox" for="{{postagem.id}}">Curtir</label>
             </div>
             <div class="row">
                 {{postagem.hora}}
                 <tt style="float:right; margin-left:5px;">{{postagem.curtidas.length}}</tt>
-                <b style="float:right;">Kabumtidas : </b>
+                <b style="float:right;">Curtidas : </b>
                 
             </div>
         </div>
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <input type="submit" class="btn btn-primary" value="Kabumentar">
+                <input type="submit" class="btn btn-primary" value="Comentar">
             </div>
         </form>
         <div class="row">
@@ -170,4 +170,3 @@
 
     </div>
 </div>
-      
