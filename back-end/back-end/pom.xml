@@ -100,7 +100,7 @@
                         <groupId>org.seleniumhq.selenium</groupId>
                         <artifactId>selenium-java</artifactId>
                         <scope>test</scope>
-                        <version>2.44.0</version>
+                        <version>4.0.0-alpha-3</version>
                         <exclusions>
                             <exclusion>
                               <groupId>org.testng</groupId>
