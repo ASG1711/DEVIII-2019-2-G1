@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class ExTest {
     
+    /*
     @Test
     public void testSimple() throws Exception {
         // Create a new instance of the Chrome driver
@@ -34,5 +35,6 @@ public class ExTest {
         //Close the browser
         driver.quit();
     }
+    */
     
 }
