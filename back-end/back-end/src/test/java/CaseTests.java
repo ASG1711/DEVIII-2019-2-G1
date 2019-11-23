@@ -7,12 +7,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CaseTests {
-      
-    WebDriver Gdriver = new ChromeDriver();
-    
+          
     @Test
     public void testReg() throws Exception {
+          
         System.setProperty("webdriver.chrome.driver", "src/chromedriver.exe");
+        WebDriver Gdriver = new ChromeDriver();
         
         System.out.println("Iniciando teste: USR-1 - Criar usuário no sistema.");
         Gdriver.get("http://localhost:8080/autenticacao/usuarios/usuarios.html");
@@ -49,7 +49,9 @@ public class CaseTests {
     
     @Test
     public void testAuth() throws Exception {
+          
         System.setProperty("webdriver.chrome.driver", "src/chromedriver.exe");
+        WebDriver Gdriver = new ChromeDriver();
         
         System.out.println("Iniciando teste: USR-2 - Logar no sistema.");
         Gdriver.get("http://localhost:8080/autenticacao/login/login.html");
@@ -57,7 +59,7 @@ public class CaseTests {
         
         System.out.println("Capturando campos (Email e senha).");
         WebElement email = Gdriver.findElement(By.id("email"));
-        WebElement password = Gdriver.findElement(By.id("password"));
+        WebElement password = Gdriver.findElement(By.id("senha"));
         WebElement submit = Gdriver.findElement(By.id("submit"));
         
         System.out.println("Inserindo valores.");
