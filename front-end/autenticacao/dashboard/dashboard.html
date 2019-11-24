@@ -57,7 +57,7 @@
             <div class="row">
                 <b>{{postagem.usuarioDto.nome}}</b>
                 <input style="float:right;" ng-checked="verificarCurtida(postagem)" data-ng-model="x" ng-click="curtir(postagem)" type="checkbox" id="{{postagem.id}}">
-                <label style="float:right;" class="checkbox" for="{{postagem.id}}">Curtir</label>
+                <label style="float:right;" id="curtidas" class="checkbox" for="{{postagem.id}}">Curtir</label>
             </div>
             <div class="row">
                 {{postagem.hora}}
