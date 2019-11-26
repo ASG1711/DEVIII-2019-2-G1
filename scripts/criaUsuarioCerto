@@ -1,0 +1,11 @@
+alter session set "_ORACLE_SCRIPT"=true; 
+
+create user SOCIAL identified by "SOCIAL";
+
+grant create session to SOCIAL;
+
+grant create table to SOCIAL;
+
+alter user SOCIAL quota unlimited on users;
+
+grant create view, create procedure, create sequence to SOCIAL;
